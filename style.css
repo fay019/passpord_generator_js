@@ -1,0 +1,37 @@
+body {
+    background-color: #f5f5f5;
+    padding-top: 50px;
+  }
+  
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  .form-range {
+    font-weight: bold;
+  }
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  .btn-generate,
+  .btn-copy {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 20px;
+  }
+  
+  .btn-copy {
+    margin-left: 10px;
+  }
+  
+  #generatedPassword {
+    height: auto;
+    resize: vertical;
+  }
+  

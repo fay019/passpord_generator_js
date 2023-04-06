@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Password Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="toast position-absolute align-items-center text-white bg-success border-0" 
+            role="alert" aria-live="assertive" aria-atomic="true"  data-bs-delay="2000"
+            data-ds-animation="true">
+        <div class="d-flex">
+          <div class="toast-body" id="copy-m">
+            Password has been copied!
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+      <h2 id="title-t">Password Generator</h1>
+      <form>
+        <div class="form-group">
+          <label for="language" id="lang-a">Language:</label>
+          <select class="form-select" id="language">
+            <option value="en" id="lang-en">English</option>
+            <option value="fr" id="lang-fr">French</option>
+            <option value="de" id="lang-de">German</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="options" id="options">Options:</label>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="lowercase" checked>
+            <label class="form-check-label" for="lowercase"  id="lowercase-t">Lowercase letters</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="uppercase">
+            <label class="form-check-label" for="uppercase"  id="uppercase-t">Uppercase letters</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="digits">
+            <label class="form-check-label" for="digits" id="digits-t">Digits</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="special">
+            <label class="form-check-label" for="special" id="special-t">Special characters</label>
+          </div>
+        </div>
+        <div class="form-range mb-5">
+          <label for="range" class="form-label" id="length-t">Password length:</label>
+          <label for="range" class="form-label pl-1" id="length">4</label>
+          <input type="range" class="form-range" min="4" max="60" id="range" value="4">
+        </div>
+        <div class="form-group mt-1">
+          <label for="password" id="pass">Password:</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="password" readonly>
+            <button type="button" class="btn btn-primary"  disabled id="copy">Copy to clipboard</button>
+          </div>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="show" checked>
+          <label class="form-check-label" for="show" id="show-t">Show password</label>
+        </div>
+        <button type="submit" class="btn btn-primary" id="generate-button">Generate password</button>
+        <div class="progress mt-2">
+          <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js" integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
