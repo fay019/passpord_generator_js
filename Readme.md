@@ -18,6 +18,7 @@ create mask for the Procedure.
 ## Authors
 
 - [@Faycal Moussouni](https://www.wko.at/service/mitarbeiter.html?id=4347386)
+
 ## To-Do
 
 - [x]  - Front-End
@@ -25,6 +26,7 @@ create mask for the Procedure.
 - [x]  - .gitignore
 - [x]  - complate the readme.md
 - [x]  - Push to github
+- [ ]  - input to text area if password lemgth is big
 
 ## Tech Stack
 

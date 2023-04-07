@@ -25,8 +25,8 @@ const languages = {
     de:"German",
     a:"Language",
     pass:"Password",
-    options:"Options",
-    errorOptions:"Select at least one option",
+    options:"Options:",
+    errorOptions:"At least one option must be selected!",
   },
   fr: {
     title:"Générateur de mot de passe",
@@ -46,8 +46,8 @@ const languages = {
     de:"Allemand",
     a:"Langue",
     pass:"Mot de passe",
-    options:"Options",
-    errorOptions:"Sélectionner au moins une option",
+    options:"Options:",
+    errorOptions:"Au moins une option doit être sélectionnée!",
   },
   de: {
     title:"Passwort-Generator",
@@ -67,10 +67,11 @@ const languages = {
     de:"Deutsch",
     a:"Sprache",
     pass:"Passwort",
-    options:"Optionen",
-    errorOptions:"Wählen Sie mindestens eine Option",
+    options:"Optionen:",
+    errorOptions:"Mindestens eine Option muss ausgewählt sein!",
   },
 };
+let error1 = false;
 // Get the select element
 const languageSelect = document.getElementById('language');
 const lengthRange = document.getElementById('range');
@@ -102,9 +103,13 @@ languageSelect.addEventListener('change', function() {
   document.getElementById('lang-de').textContent = lang.de;
   document.getElementById('lang-a').textContent = lang.a;
   document.getElementById('options').textContent = lang.options;
+  document.getElementById('options').insertAdjacentHTML('beforeend', ' <span id="option-error"></span>');
   document.getElementById('pass').textContent = lang.pass;
-  copy.textContent = lang.copy;
+  copy.setAttribute("data-bs-original-title",lang.copy);
   copyM.textContent = lang.copyM;
+  if (error1) {
+    document.getElementById("option-error").textContent = lang.errorOptions;
+  }
 });
 
 // Function to generate a random password
@@ -112,11 +117,6 @@ function generatePassword(length, options) {
   let password = '';
   let charset = '';
   passwordInput.classList.remove('text-danger');
-  // if no options selected
-  if (options.lowercase == false && options.uppercase == false && options.digits == false && options.special == false ) {
-    passwordInput.classList.add('text-danger');
-    return languages[languageSelect.value].errorOptions; 
-  }
   for (const option in options) {
     if (options[option]) {
       charset += characterSets[option];
@@ -128,6 +128,7 @@ function generatePassword(length, options) {
   // remove desabled
   copy.removeAttribute("disabled");
   passwordStrength(password);
+  checkPasswordLength(password.length)
   return password;
 }
 
@@ -200,11 +201,9 @@ function passwordStrength(password) {
   }
   if (password.match( /(.*[!@#$%^&*()_+~`|}{[\]\\:;?><,./-=]){2,}.*/)) {
     strength += 2;
-    console.log("x2");
   }
   else if (password.match(/[!@#$%^&*()_+~`|}{[\]\\:;?><,./-=]/)) {
     strength += 1;
-    console.log("x1");
   }
   
   const strengthPercentage = Math.round(strength * 16.67);
@@ -234,4 +233,50 @@ function updateProgressBar(value) {
   progressBar.setAttribute("aria-valuenow", value);
   setColor(value);
 }
+
+function checkOptions() {
+  const checkboxes = document.querySelectorAll('.check-list');
+  const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+  if (!isChecked) {
+    document.getElementById('options').classList.add("text-danger")
+    document.querySelector("#option-error").textContent =  languages[languageSelect.value].errorOptions;
+    document.querySelector("#generate-button").disabled = true;
+    error1 = true;
+
+  }else {
+    document.getElementById('options').classList.remove("text-danger")
+    document.querySelector("#option-error").textContent =  "";
+    document.querySelector("#generate-button").disabled = false;
+    error1 = false;
+  }
+}
+document.querySelectorAll('.check-list').forEach(checkbox => {
+  checkbox.addEventListener('change', checkOptions);
+});
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+  const passwordInput1 = document.querySelector("#password");
+  const copyButton = document.querySelector("#copy");
+
+  function checkPasswordLength(passwordLength) {
+    const inputWidth = passwordInput1.offsetWidth;
+    const inputFontSize = parseFloat(window.getComputedStyle(passwordInput1).fontSize);
+    const charWidth = inputFontSize * 0.6; // assume average character width is 0.6 times font size
+    console.log("test func", passwordLength, inputWidth, charWidth );
+    if (passwordLength > inputWidth / charWidth) {
+      passwordInput1.style.display = "none";
+      passwordInput1.insertAdjacentHTML("afterend", `<textarea class="form-control" rows="3" id="password-textarea" readonly>${passwordInput1.value}</textarea>`);
+      copyButton.disabled = true;
+    } else {
+      const passwordTextarea = document.querySelector("#password-textarea");
+      if (passwordTextarea) {
+        passwordTextarea.parentNode.removeChild(passwordTextarea);
+      }
+      passwordInput1.style.display = "block";
+      copyButton.disabled = false;
+    }
+  }
+
 

@@ -5,6 +5,7 @@
     <title>Password Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
   </head>
   <body>
     <div class="container">
@@ -29,21 +30,21 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="options" id="options">Options:</label>
+          <label for="options" id="options">Options: <span id="option-error"></span></label>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="lowercase" checked>
+            <input class="form-check-input check-list" type="checkbox" id="lowercase" checked>
             <label class="form-check-label" for="lowercase"  id="lowercase-t">Lowercase letters</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="uppercase">
+            <input class="form-check-input check-list" type="checkbox" id="uppercase">
             <label class="form-check-label" for="uppercase"  id="uppercase-t">Uppercase letters</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="digits">
+            <input class="form-check-input check-list" type="checkbox" id="digits">
             <label class="form-check-label" for="digits" id="digits-t">Digits</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="special">
+            <input class="form-check-input check-list" type="checkbox" id="special">
             <label class="form-check-label" for="special" id="special-t">Special characters</label>
           </div>
         </div>
@@ -56,7 +57,7 @@
           <label for="password" id="pass">Password:</label>
           <div class="input-group">
             <input type="text" class="form-control" id="password" readonly>
-            <button type="button" class="btn btn-primary"  disabled id="copy">Copy to clipboard</button>
+            <button type="button" class="btn btn-primary"  disabled id="copy" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to Clipboard"><i class="bi bi-clipboard-plus-fill"></i></button>
           </div>
         </div>
         <div class="form-group form-check">
