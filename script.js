@@ -128,7 +128,7 @@ function generatePassword(length, options) {
   // remove desabled
   copy.removeAttribute("disabled");
   passwordStrength(password);
-  checkPasswordLength(password.length)
+  checkPasswordLength(password)
   return password;
 }
 
@@ -253,30 +253,36 @@ function checkOptions() {
 document.querySelectorAll('.check-list').forEach(checkbox => {
   checkbox.addEventListener('change', checkOptions);
 });
-const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+
 tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl)
 })
   const passwordInput1 = document.querySelector("#password");
   const copyButton = document.querySelector("#copy");
 
-  function checkPasswordLength(passwordLength) {
+  function checkPasswordLength(password) {
     const inputWidth = passwordInput1.offsetWidth;
-    const inputFontSize = parseFloat(window.getComputedStyle(passwordInput1).fontSize);
-    const charWidth = inputFontSize * 0.6; // assume average character width is 0.6 times font size
-    console.log("test func", passwordLength, inputWidth, charWidth );
-    if (passwordLength > inputWidth / charWidth) {
+    const myTextArea = document.getElementById("password-textarea"); 
+    if (myTextArea) {
+      console.log("textArea exist");
+      myTextArea.remove();
+    }   
+    if (password.length > 43) {
+      console.log("pass: ",password);
       passwordInput1.style.display = "none";
-      passwordInput1.insertAdjacentHTML("afterend", `<textarea class="form-control" rows="3" id="password-textarea" readonly>${passwordInput1.value}</textarea>`);
-      copyButton.disabled = true;
-    } else {
-      const passwordTextarea = document.querySelector("#password-textarea");
-      if (passwordTextarea) {
-        passwordTextarea.parentNode.removeChild(passwordTextarea);
-      }
-      passwordInput1.style.display = "block";
+      passwordInput1.insertAdjacentHTML("afterend", `<textarea class="form-control" rows="3" id="password-textarea" readonly>${password}</textarea>`);
       copyButton.disabled = false;
+      document.querySelector('#show').style.display = "none";
+      document.querySelector('#show-t').style.display = "none";
+    } else {
+      passwordInput.style.display = "block"; 
+      document.querySelector('#password').value = password;
+      copyButton.disabled = false;
+      document.querySelector('#show').style.display = "block";
+      document.querySelector('#show-t').style.display = "block";
     }
   }
+
 
 
