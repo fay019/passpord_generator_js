@@ -26,7 +26,7 @@ create mask for the Procedure.
 - [x]  - .gitignore
 - [x]  - complate the readme.md
 - [x]  - Push to github
-- [ ]  - input to text area if password lemgth is big
+- [x]  - input to text area if password lemgth is big
 
 ## Tech Stack
 
